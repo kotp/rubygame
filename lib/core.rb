@@ -1,7 +1,7 @@
 # The game core engine
 class Core
-  RANGE = 1..100 # 1 to 100
-
+  RANGE = 1..100
+  RESPONSES = { -1 => :higher, 0 => :win, 1 => :lower }
   private
 
   attr_reader :secret
@@ -15,7 +15,7 @@ class Core
 
   def guess(number)
     @statistics[:tries] += 1
-    { -1 => :higher, 0 => :win, 1 => :lower }[number.to_i <=> @secret]
+    RESPONSES[number.to_i <=> @secret]
   end
 
   def tries
